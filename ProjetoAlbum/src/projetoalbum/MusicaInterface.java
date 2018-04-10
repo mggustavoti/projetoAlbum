@@ -24,10 +24,15 @@ public class MusicaInterface extends javax.swing.JFrame {
             
     public MusicaInterface() {
         initComponents();
+        
         musicas[0] = "01 Ana Carolina - Rosas";
         musicas[1] = "02 Kid Abelha - Chuva";
-        musicas[2] = "03 Pitty = Deja Vu";
+        musicas[2] = "03 Pitty - Deja Vu";
         musicas[3] = "04 Tom Jobin - WAVE";
+        
+        jb_Stop.setEnabled(false);
+        jb_Voltar.setEnabled(false);
+        jb_Avancar.setEnabled(false);
     }
     
     class GerenciaMusica extends Thread{
@@ -73,6 +78,11 @@ public class MusicaInterface extends javax.swing.JFrame {
         });
 
         jb_Stop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/stop.png"))); // NOI18N
+        jb_Stop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_StopActionPerformed(evt);
+            }
+        });
 
         jb_Voltar.setText("<<");
         jb_Voltar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,11 +124,12 @@ public class MusicaInterface extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addComponent(lb_Musica, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jb_Play)
-                    .addComponent(jb_Stop)
-                    .addComponent(jb_Avancar)
-                    .addComponent(jb_Voltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jb_Voltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jb_Play)
+                        .addComponent(jb_Stop)
+                        .addComponent(jb_Avancar)))
                 .addContainerGap())
         );
 
@@ -143,18 +154,58 @@ public class MusicaInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_VoltarActionPerformed
-        // TODO add your handling code here:
+        cont--;
+        lb_Musica.setText("Música: " + musicas[cont]);
+        
+        if(pl == true){
+            ply.close();
+            GerenciaMusica mp3 = new GerenciaMusica();
+            mp3.start();
+        }
+        
+        if(cont == 0){
+            jb_Voltar.setEnabled(false);
+        }
+        
+        if(cont <3){
+            jb_Avancar.setEnabled(true);
+        }
     }//GEN-LAST:event_jb_VoltarActionPerformed
 
     private void jb_AvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_AvancarActionPerformed
-        // TODO add your handling code here:
+        jb_Voltar.setEnabled(true);
+        cont++;
+        lb_Musica.setText("Música: " + musicas[cont]);
+        
+        if(pl == true){
+            ply.close();
+            GerenciaMusica mp3 = new GerenciaMusica();
+            mp3.start();
+        }
+        
+        if(cont == 3){
+            jb_Avancar.setEnabled(false);
+        }
+        
+                
     }//GEN-LAST:event_jb_AvancarActionPerformed
 
     private void jb_PlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_PlayActionPerformed
         GerenciaMusica mp3 = new GerenciaMusica();
         mp3.start();
+        lb_Musica.setText("Música: " + musicas[cont]);
         jb_Play.setEnabled(false);
+        jb_Stop.setEnabled(true);
+        jb_Avancar.setEnabled(true);
+        pl = true;
+        
     }//GEN-LAST:event_jb_PlayActionPerformed
+
+    private void jb_StopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_StopActionPerformed
+        ply.close();
+        jb_Play.setEnabled(true);
+        jb_Stop.setEnabled(false);
+    }//GEN-LAST:event_jb_StopActionPerformed
 
     /**
      * @param args the command line arguments
