@@ -5,6 +5,8 @@
  */
 package projetoalbum;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author 05899165642
@@ -33,9 +35,8 @@ public class CadastroNovoUsuario extends javax.swing.JFrame {
         jb_senha_cadastrousuario = new javax.swing.JLabel();
         tf_email_cadastrousuario = new javax.swing.JTextField();
         tf_nome_cadastrousuario = new javax.swing.JTextField();
-        tf_senha_cadastrousuario = new javax.swing.JTextField();
         jb_ok_cadastrar_cadastrousuario = new javax.swing.JButton();
-        jb_voltar_cadastrousuario = new javax.swing.JButton();
+        tf_senha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Usuário");
@@ -53,13 +54,6 @@ public class CadastroNovoUsuario extends javax.swing.JFrame {
             }
         });
 
-        jb_voltar_cadastrousuario.setText("Voltar");
-        jb_voltar_cadastrousuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_voltar_cadastrousuarioActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -73,19 +67,18 @@ public class CadastroNovoUsuario extends javax.swing.JFrame {
                                 .addComponent(jb_nome_cadastrousuario)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(tf_nome_cadastrousuario, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jb_email_cadastrousuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tf_email_cadastrousuario, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jb_senha_cadastrousuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_senha_cadastrousuario, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jb_senha_cadastrousuario)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tf_senha))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jb_email_cadastrousuario)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(tf_email_cadastrousuario, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(122, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jb_voltar_cadastrousuario)
-                        .addGap(34, 34, 34)
                         .addComponent(jb_ok_cadastrar_cadastrousuario))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -102,11 +95,9 @@ public class CadastroNovoUsuario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_senha_cadastrousuario)
-                    .addComponent(tf_senha_cadastrousuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jb_voltar_cadastrousuario)
-                    .addComponent(jb_ok_cadastrar_cadastrousuario)))
+                .addComponent(jb_ok_cadastrar_cadastrousuario))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,12 +121,16 @@ public class CadastroNovoUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_ok_cadastrar_cadastrousuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ok_cadastrar_cadastrousuarioActionPerformed
-        // TODO add your handling code here:
+       
+        CadastroNovoUsuarioClasse  objusuario = new CadastroNovoUsuarioClasse();
+        if ((tf_nome_cadastrousuario.getText().equals("")) || (tf_email_cadastrousuario.getText().equals("")) ||  (String.valueOf(tf_senha.getPassword()).equals("")) ){
+            JOptionPane.showMessageDialog(null, "Favor preencher todos os campos");
+        }else{
+            
+        objusuario.inserirusuario(tf_nome_cadastrousuario.getText(), tf_email_cadastrousuario.getText(), String.valueOf(tf_senha.getPassword()));
+        }
+        
     }//GEN-LAST:event_jb_ok_cadastrar_cadastrousuarioActionPerformed
-
-    private void jb_voltar_cadastrousuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_voltar_cadastrousuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_voltar_cadastrousuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,9 +173,8 @@ public class CadastroNovoUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jb_nome_cadastrousuario;
     private javax.swing.JButton jb_ok_cadastrar_cadastrousuario;
     private javax.swing.JLabel jb_senha_cadastrousuario;
-    private javax.swing.JButton jb_voltar_cadastrousuario;
     private javax.swing.JTextField tf_email_cadastrousuario;
     private javax.swing.JTextField tf_nome_cadastrousuario;
-    private javax.swing.JTextField tf_senha_cadastrousuario;
+    private javax.swing.JPasswordField tf_senha;
     // End of variables declaration//GEN-END:variables
 }

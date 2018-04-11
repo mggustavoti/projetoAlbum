@@ -23,10 +23,10 @@ public class CadastroNovoUsuarioClasse {
 }
     
     
-    public void inserirusuario(){
+    public void inserirusuario(String nome, String email, String senhausuario){
      
      String sql;
-     sql = "";
+     sql = "Insert into usuario (nomeusuario, email, senhausuario) values (' " +nome+ " ', '" + email + "', MD5( '" + senhausuario + "'))";
     
   
         try {
@@ -37,8 +37,25 @@ public class CadastroNovoUsuarioClasse {
         } catch (SQLException ex) {
             Logger.getLogger(CadastroNovoUsuarioClasse.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
 
-}
+    public void listarusuario() {
+        String sql;
+        sql = "Selec * from usuario";
+        
+        try {
+            PreparedStatement stmt = conexao.prepareStatement (sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroNovoUsuarioClasse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+                
+                
+    }
+        
+        
+
     
     
     
