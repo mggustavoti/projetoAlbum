@@ -123,11 +123,15 @@ public class CadastroNovoUsuario extends javax.swing.JFrame {
     private void jb_ok_cadastrar_cadastrousuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ok_cadastrar_cadastrousuarioActionPerformed
        
         CadastroNovoUsuarioClasse  objusuario = new CadastroNovoUsuarioClasse();
-        if ((tf_nome_cadastrousuario.getText().equals("")) || (tf_email_cadastrousuario.getText().equals("")) ||  (String.valueOf(tf_senha.getPassword()).equals("")) ){
+        
+        int chave = objusuario.verificausuario(tf_nome_cadastrousuario.getText());
+        if (chave == 0){        
+            if ((tf_nome_cadastrousuario.getText().equals("")) || (tf_email_cadastrousuario.getText().equals("")) ||  (String.valueOf(tf_senha.getPassword()).equals("")) ){
             JOptionPane.showMessageDialog(null, "Favor preencher todos os campos");
         }else{
             
         objusuario.inserirusuario(tf_nome_cadastrousuario.getText(), tf_email_cadastrousuario.getText(), String.valueOf(tf_senha.getPassword()));
+        }
         }
         
     }//GEN-LAST:event_jb_ok_cadastrar_cadastrousuarioActionPerformed

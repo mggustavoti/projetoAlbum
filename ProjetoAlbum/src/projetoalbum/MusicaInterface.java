@@ -65,7 +65,7 @@ public class MusicaInterface extends javax.swing.JFrame {
         jb_Voltar = new javax.swing.JButton();
         jb_Avancar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Player");
 
         lb_Musica.setText("Música:");
