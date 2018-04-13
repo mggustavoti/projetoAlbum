@@ -125,17 +125,21 @@ public class CadastroNovoUsuario extends javax.swing.JFrame {
         CadastroNovoUsuarioClasse  objusuario = new CadastroNovoUsuarioClasse();
         
         int chave = objusuario.verificausuario(tf_nome_cadastrousuario.getText());
-        if (chave == 0){        
-            if ((tf_nome_cadastrousuario.getText().equals("")) || (tf_email_cadastrousuario.getText().equals("")) ||  (String.valueOf(tf_senha.getPassword()).equals("")) ){
-            JOptionPane.showMessageDialog(null, "Favor preencher todos os campos");
-        }else{
-            
-        objusuario.inserirusuario(tf_nome_cadastrousuario.getText(), tf_email_cadastrousuario.getText(), String.valueOf(tf_senha.getPassword()));
-        }
-        }
+        int chave2 = objusuario.verificaemail(tf_email_cadastrousuario.getText());
         
+                
+        if (chave == 0 || chave2 == 0){        
+            if ((tf_nome_cadastrousuario.getText().equals("")) || (tf_email_cadastrousuario.getText().equals("")) ||  (String.valueOf(tf_senha.getPassword()).equals("")))
+            JOptionPane.showMessageDialog(null, "Favor preencher todos os campos");
+        }else{            
+            objusuario.inserirusuario(tf_nome_cadastrousuario.getText(), tf_email_cadastrousuario.getText(), String.valueOf(tf_senha.getPassword()));
+            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso.");
+        }
     }//GEN-LAST:event_jb_ok_cadastrar_cadastrousuarioActionPerformed
 
+    
+    
+    
     /**
      * @param args the command line arguments
      */
